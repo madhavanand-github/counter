@@ -1,6 +1,8 @@
+import { MinusIcon, PlusIcon, ResetIcon } from "@radix-ui/react-icons";
+
 export default function Card() {
   return (
-    <div>
+    <div className="card">
       <Title />
       <Count />
       <ResetButton />
@@ -10,22 +12,22 @@ export default function Card() {
 }
 
 const Title = () => {
-  return <h1>Online Counter</h1>;
+  return <h1 className="title">Online Counter</h1>;
 };
 
 const Count = () => {
-  return <p>0</p>;
+  return <p className="count">0</p>;
 };
 
 const ResetButton = () => {
-  return <button>Reset</button>;
+  return <button className="reset-btn"><ResetIcon className="reset-btn-icon"/></button>;
 };
 
 const CountButtons = () => {
   return (
-    <div>
-      <button>+</button>
-      <button>-</button>
+    <div className="button-container">
+      <button className="count-btn"><PlusIcon className="count-btn-icon"/></button>
+      <button className="count-btn"><MinusIcon className="count-btn-icon"/></button>
     </div>
   );
 };
