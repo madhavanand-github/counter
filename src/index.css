@@ -127,3 +127,20 @@ main {
   height: 40px;
   width: 40px;
 }
+
+@media (max-width: 680px) or (max-height: 730px) {
+  .card {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .title {
+    margin-top: 100px;
+  }
+
+  .button-container {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
