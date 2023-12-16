@@ -1,9 +1,11 @@
+import Card from "./components/Card"
+
 function App() {
 
   return (
-    <>
-    The beginning of a counter app!
-    </>
+    <main>
+      <Card />
+    </main>
   )
 }
 
