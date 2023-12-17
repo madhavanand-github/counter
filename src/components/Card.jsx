@@ -7,17 +7,17 @@ export default function Card() {
   // Count functions
   const resetCount = () => setCount(0);
   const incrementCount = () => setCount((prev) => prev + 1);
-  const decrementCount = () => setCount((prev) => prev - 1);
+  const decrementCount = () => setCount((prev) => (prev === 0 ? 0 : prev - 1));
 
   return (
     <div className="card">
       <Title />
       <Count count={count} />
       <ResetButton resetCount={resetCount} />
-      <CountButtons
-        incrementCount={incrementCount}
-        decrementCount={decrementCount}
-      />
+      <div className="button-container">
+        <CountButton handleCount={decrementCount} icon={MinusIcon} />
+        <CountButton handleCount={incrementCount} icon={PlusIcon} />
+      </div>
     </div>
   );
 }
@@ -38,15 +38,10 @@ const ResetButton = ({ resetCount }) => {
   );
 };
 
-const CountButtons = ({ incrementCount, decrementCount }) => {
+const CountButton = ({ handleCount, icon: Icon }) => {
   return (
-    <div className="button-container">
-      <button className="count-btn" onClick={incrementCount}>
-        <PlusIcon className="count-btn-icon" />
-      </button>
-      <button className="count-btn" onClick={decrementCount}>
-        <MinusIcon className="count-btn-icon" />
-      </button>
-    </div>
+    <button className="count-btn" onClick={handleCount}>
+      {Icon && <Icon className="count-btn-icon" />}
+    </button>
   );
 };
