@@ -128,6 +128,7 @@ main {
   width: 40px;
 }
 
+/* Responsive to smaller screens */
 @media (max-width: 680px) or (max-height: 730px) {
   .card {
     width: 100%;
