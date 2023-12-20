@@ -1,5 +1,5 @@
 import { MinusIcon, PlusIcon, ResetIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Card() {
   const [count, setCount] = useState(0);
@@ -7,24 +7,49 @@ export default function Card() {
 
   // Count functions
   const resetCount = () => setCount(0);
-  const incrementCount = () => setCount((prev) => prev + 1);
-  const decrementCount = () => setCount((prev) => (prev === 0 ? 0 : prev - 1));
+  const incrementCount = (e) => {
+    setCount((prev) => prev + 1);
+    e.currentTarget.blur();
+  };
+  const decrementCount = (e) => {
+    setCount((prev) => (prev === 0 ? 0 : prev - 1));
+    e.currentTarget.blur();
+  };
+
+  // Pressing the space key will increment the count
+  const handleKeyPress = (e) => {
+    if (e.code === "Space") setCount((prev) => ((prev > 4) ? 5 : prev + 1));
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+  }, []);
 
   return (
     <div className={`card ${locked ? "card--limit" : ""}`}>
-      <Title locked={locked}/>
+      <Title locked={locked} />
       <Count count={count} />
       <ResetButton resetCount={resetCount} />
-      <div className="button-container">
-        <CountButton handleCount={decrementCount} icon={MinusIcon} locked={locked}/>
-        <CountButton handleCount={incrementCount} icon={PlusIcon} locked={locked} />
-      </div>
+      <ButtonContainer>
+        <CountButton
+          handleCount={decrementCount}
+          icon={MinusIcon}
+          locked={locked}
+        />
+        <CountButton
+          handleCount={incrementCount}
+          icon={PlusIcon}
+          locked={locked}
+        />
+      </ButtonContainer>
     </div>
   );
 }
 
 const Title = ({ locked }) => {
-  return <h1 className="title">{locked ? "LOCKED !! Buy Pro" : "Online Counter"}</h1>;
+  return (
+    <h1 className="title">{locked ? "LOCKED !! Buy Pro" : "Online Counter"}</h1>
+  );
 };
 
 const Count = ({ count }) => {
@@ -46,3 +71,7 @@ const CountButton = ({ handleCount, icon: Icon, locked }) => {
     </button>
   );
 };
+
+const ButtonContainer = ({ children }) => {
+  return <div className="button-container">{children}</div>;
+}
