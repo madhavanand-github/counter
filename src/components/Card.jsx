@@ -2,28 +2,41 @@ import { MinusIcon, PlusIcon, ResetIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 
 export default function Card() {
+
   const [count, setCount] = useState(0);
   const locked = count === 5 ? true : false;
 
-  // Count functions
-  const resetCount = () => setCount(0);
-  const incrementCount = (e) => {
-    setCount((prev) => prev + 1);
+  // Update the count
+  const updateCount = (updater) => (e) => {
+    setCount(updater);
     e.currentTarget.blur();
   };
-  const decrementCount = (e) => {
-    setCount((prev) => (prev === 0 ? 0 : prev - 1));
-    e.currentTarget.blur();
-  };
+  
+  const resetCount = updateCount(() => 0);
+  const incrementCount = updateCount((prev) => prev + 1);
+  const decrementCount = updateCount((prev) => (prev === 0 ? 0 : prev - 1));
 
   // Pressing the space key will increment the count
   const handleKeyPress = (e) => {
-    if (e.code === "Space") setCount((prev) => ((prev > 4) ? 5 : prev + 1));
+    if (e.code === "Space") setCount((prev) => (prev + 1));
   };
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
   }, []);
+
+  // Decrease the font size on increasing the count
+  const setFontSize = (textLength) => {
+    
+    const countEl = document.getElementById("count");
+    const min = Math.max((100 - (textLength * 10)), 40 );
+    const max = Math.max((200 - (textLength * 16)), 80);
+    countEl.style.fontSize = `clamp(${min}px, 20vw, ${max}px)`;
+  };
+
+  useEffect(() => {
+    setFontSize(count.toString().length);
+  }, [count]);
 
   return (
     <div className={`card ${locked ? "card--limit" : ""}`}>
@@ -53,7 +66,11 @@ const Title = ({ locked }) => {
 };
 
 const Count = ({ count }) => {
-  return <p className="count">{count}</p>;
+  return (
+    <p className="count" id="count">
+      {count}
+    </p>
+  );
 };
 
 const ResetButton = ({ resetCount }) => {

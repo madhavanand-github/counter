@@ -41,6 +41,7 @@ main {
   box-shadow: 0 25px 121px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   transition: all 0.4s;
 }
@@ -65,9 +66,9 @@ main {
 /* Count */
 .count {
   color: #1d2507;
-  font-size: 200px;
+  font-size: clamp(100px, 20vw, 200px);
   font-weight: 600;
-  margin-top: 10px;
+  line-height: 0.9;
 }
 
 /* Reset Button */
@@ -93,7 +94,6 @@ main {
   background-color: #1d2507;
   height: 116px;
   width: 100%;
-  margin-top: auto;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   display: flex;
