@@ -2,7 +2,14 @@
 
 Count anything online for Free.
 
-# Dynamic Text Size based on Viewport Width and Character Count
+https://github.com/madhavanand-github/counter/assets/57529334/6835e438-bfa2-427e-8682-36c8fa23db02
 
-[![View CodePen](https://img.shields.io/badge/View-CodePen-blue?style=flat-square&logo=codepen)](https://codepen.io/jsstrn/pen/mMMmZB)
+
+# What's special
+
+- **Dynamic Clamp** : Dynamic Text Size based on Viewport Width and Character Count. [This helped alot.](https://codepen.io/jsstrn/pen/mMMmZB)
+- **Raw CSS** : Beautiful and Responsive UI
+
+
+
 
