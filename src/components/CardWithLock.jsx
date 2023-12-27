@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 export default function Card() {
 
   const [count, setCount] = useState(0);
+  const locked = count === 5 ? true : false;
 
-  // Functions to update the count
+  // Update the count
   const updateCount = (updater) => (e) => {
     setCount(updater);
     e.currentTarget.blur();
@@ -38,27 +39,29 @@ export default function Card() {
   }, [count]);
 
   return (
-    <div className={`card`}>
-      <Title />
+    <div className={`card ${locked ? "card--limit" : ""}`}>
+      <Title locked={locked} />
       <Count count={count} />
       <ResetButton resetCount={resetCount} />
       <ButtonContainer>
         <CountButton
           handleCount={decrementCount}
           icon={MinusIcon}
+          locked={locked}
         />
         <CountButton
           handleCount={incrementCount}
           icon={PlusIcon}
+          locked={locked}
         />
       </ButtonContainer>
     </div>
   );
 }
 
-const Title = () => {
+const Title = ({ locked }) => {
   return (
-    <h1 className="title">{"Online Counter"}</h1>
+    <h1 className="title">{locked ? "LOCKED !! Buy Pro" : "Online Counter"}</h1>
   );
 };
 
@@ -78,9 +81,9 @@ const ResetButton = ({ resetCount }) => {
   );
 };
 
-const CountButton = ({ handleCount, icon: Icon}) => {
+const CountButton = ({ handleCount, icon: Icon, locked }) => {
   return (
-    <button  className="count-btn" onClick={handleCount}>
+    <button disabled={locked} className="count-btn" onClick={handleCount}>
       {Icon && <Icon className="count-btn-icon" />}
     </button>
   );
