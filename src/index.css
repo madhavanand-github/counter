@@ -15,7 +15,7 @@ button {
 /* Struture Settings */
 body {
   font-family: "Inter", sans-serif;
-  height: 100vh;
+  height: 100dvh;
   background-image: radial-gradient(ellipse, #385300, #212900);
 }
 
